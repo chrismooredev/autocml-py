@@ -5,10 +5,10 @@ This library (and associated scripts) supports authentication via environment va
 
 |Purpose|This Library|VIRL Library|Breakout Tool|Example|
 |--|--|--|--|--|
-|CML Controller|`CML_HOST`|`VIRL2_URL`|`BREAKOUT_CONTROLLER`| 192.168.0.50
-|Username|`CML_USER`|`VIRL2_USER`|`BREAKOUT_USERNAME`|admin|
+|CML Controller|`CML_HOST`|`VIRL2_URL`|`BREAKOUT_CONTROLLER`|`192.168.0.50`|
+|Username|`CML_USER`|`VIRL2_USER`|`BREAKOUT_USERNAME`|`admin`|
 |Password (Base-64)|`CML_PASS64`|||`cGFzc3dvcmQ=`|
-|Password|`CML_PASS`|`VIRL2_PASS`|`BREAKOUT_PASSWORD`|password|
+|Password|`CML_PASS`|`VIRL2_PASS`|`BREAKOUT_PASSWORD`|`password`|
 
 
 Any combination of the above variables can be used, although the leftmost variable name will be prioritized in case of conflicts. Using `CML_PASS64` is recommended (and prioritized over other password variables) to prevent the likelyhood of successful shoulder-surfers.
@@ -22,7 +22,7 @@ This library includes common scripts/commands useful for administrative purposes
 Asserts a lab's interfaces against a .csv file. The csv file must have exactly three columns, (device ID/label, interface, and IP address (with optional CIDR notation)) and may look like the following:
 
 ```csv
-Label,Int,IPv4
+Node Label,Int,IPv4
 n0,GigabitEthernet0/0,192.168.0.24/26
 R2,Fa0/2,10.1.34.2/24
 R3,L1,10.255.0.3/32

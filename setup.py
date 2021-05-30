@@ -55,7 +55,7 @@ setup(
     #
     # This field corresponds to the "Home-Page" metadata field:
     # https://packaging.python.org/specifications/core-metadata/#home-page-optional
-    url='https://github.com/csm123199/autocml-py',  # Optional
+    url='https://github.com/chrismooredev/autocml-py',  # Optional
 
     # This should be your name or the name of the organization which owns the
     # project.
@@ -63,7 +63,7 @@ setup(
 
     # This should be a valid email address corresponding to the author listed
     # above.
-    author_email='git@chrismoore.dev',  # Optional
+    author_email='dev@chrismoore.dev',  # Optional
 
     # Classifiers help users find your project by categorizing it.
     #
@@ -196,7 +196,7 @@ setup(
     # maintainers, and where to support the project financially. The key is
     # what's used to render the link text on PyPI.
     project_urls={  # Optional
-        'Bug Reports': 'https://github.com/csm123199/autocml-py/issues',
-        'Source': 'https://github.com/csm123199/autocml-py/',
+        'Bug Reports': 'https://github.com/chrismooredev/autocml-py/issues',
+        'Source': 'https://github.com/chrismooredev/autocml-py/',
     },
 )
