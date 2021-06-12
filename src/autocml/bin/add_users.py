@@ -101,6 +101,8 @@ def main(pargs=None):
 					user.description,
 					user.roles, user.groups
 				)
+			else:
+				print(f"Skipping user {user.username} (already exists)")
 
 if __name__ == "__main__":
 	main()
