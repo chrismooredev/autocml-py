@@ -13,9 +13,46 @@ This library (and associated scripts) supports authentication via environment va
 
 Any combination of the above variables can be used, although the leftmost variable name will be prioritized in case of conflicts. Using `CML_PASS64` is recommended (and prioritized over other password variables) to prevent the likelyhood of successful shoulder-surfers.
 
+## Bash example
+```sh
+CML_HOST="<cml server hostname/IP address>"
+CML_USER="admin"
+CML_PASS="password"
+```
+Note: Above example uses a plaintext password. I first recommend converting it to base64, then passing it in a `CML_PASS64` environment variable.
+
+# Installing
+
+The following should work in both Linux/Bash, and PowerShell.
+```sh
+pip install virl2-client # Install official VIRL/CML library from Cisco
+pip install autocml # Install this library + associated utilities
+```
+
 # Scripts
 
 This library includes common scripts/commands useful for administrative purposes, or for automating common lab scenarios.
+
+## cml-add-users
+
+Loads in a CSV file containing a list of users (a sample CSV can be saved by running `cml-add-users --template <OUTPUT TEMPLATE FILENAME>`
+
+By default, it adds the users in the csv file to the authenticated CML instance. It only adds/affects users that do not already exist.
+
+Can also delete users that are listed in the csv, if a `--delete` flag is passed.
+
+Example template:
+```csv
+Username,Password,Full Name,Description,Roles,Groups
+user1,plaintext password,User One,The first user,admin,admin_group
+user2,another_password,User Two,The second user,,"net378,net123"
+```
+
+Example usage: `cml-add-users <USER CSV FILENAME>`
+
+View help info for more details (`cml-add-users --help`)
+
+(Currently untested as the primary author does not have admin access to a multi-user instance)
 
 ## cml-verify-ints
 
@@ -34,9 +71,11 @@ Can also dump a CSV of interfaces, that can later be used with this utility to d
 
 Also has a flag to emit results as JSON, although it cannot read in JSON inputs.
 
-## cml-bulk-yaml
+## cml-bulk-labs
 
-Allows for downloading/uploading lab YAMLs in bulk for archival purposes. Useful when migrating YAML labs files from one CML controller to another (like for a fresh upgrade).
+Allows for downloading/uploading/deleting lab YAMLs in bulk for archival purposes. Useful when migrating YAML labs files from one CML controller to another (like for a fresh upgrade).
+
+View the help for detailed configuration options/features (`cml-bulk-labs --help`)
 
 ## cml-dump-cfgs (WIP)
 
