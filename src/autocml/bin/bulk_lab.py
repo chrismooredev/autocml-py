@@ -21,7 +21,7 @@ description=[
 def optparser():
 	parser = argparse.ArgumentParser(
 		description='\n'.join(description),
-		parents=[autocml.argparse_client()]
+		parents=[autocml.argparse.root_parser()]
 	)
 	parser.add_argument('-u', '--user',
 		dest="user",
@@ -35,7 +35,8 @@ def optparser():
 
 	subcmds = parser.add_subparsers(
 		dest='action',
-		help="Actions:"
+		help="Actions:",
+		required=True,
 	)
 	
 	
@@ -256,6 +257,8 @@ def main(pargs=None):
 	client = autocml.get_client(args)
 
 	if args.user is not None and args.user != client.username:
+		# I do not personally have admin access to a multi-user instance to test this
+		# I think the code is built to allow this already, it would just need to be tested/verified
 		raise NotImplementedError("specifying a specific user is not yet implemented")
 
 	if args.action == 'download' or args.action == 'delete':
@@ -269,8 +272,8 @@ def main(pargs=None):
 		return upload(client, args.folder, user=args.user, overwrite=args.overwrite, ignore=args.ignore, skip=args.skip)
 	elif args.action == "delete":
 		return delete(client, users=targets, confirmed=args.confirmed, force=args.force)
-	else:
-		raise ValueError("unrecognized command line action")
+	else: # should not be reachable - argparse should mandate the action, and validate it
+		raise ValueError("unrecognized command line action - this is a programmer error")
 	
 if __name__ == "__main__":
 	main()

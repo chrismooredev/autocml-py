@@ -178,11 +178,12 @@ setup(
     entry_points={  # Optional
         'console_scripts': [
 			'cml-verify-ints=autocml.bin.verify_ints:main',
-			'cml-bulk-yaml=autocml.bin.bulk_yaml:main',
+			'cml-bulk-lab=autocml.bin.bulk_lab:main',
 			'cml-dump-pings=autocml.bin.dump_pings:main',
 			'cml-dump-cfgs=autocml.bin.dump_cfg:main',
 			'cml-pcap=autocml.bin.pcap:main',
             'cml-start-session=autocml.bin.start_session:main',
+            'cml-add-users=autocml.bin.add_users:main',
         ],
     },
 

@@ -20,7 +20,7 @@ except ImportError:
 
 
 
-def from_env() -> Tuple[str, str, str]:
+def from_env(exit_on_missing=True) -> Tuple[str, str, str]:
 	""" Retrieves the CML authentication info from the environment and returns it as (host, user, passwd) """
 	env = os.environ
 	host = (env.get("CML_HOST"), env.get("VIRL2_URL"), env.get("BREAKOUT_CONTROLLER"))
@@ -36,7 +36,7 @@ def from_env() -> Tuple[str, str, str]:
 		rtn_pass = next(p for p in passwd if p is not None)
 
 	# ensure all are populated
-	if not all([rtn_host, rtn_user, rtn_pass]):
+	if exit_on_missing and not all([rtn_host, rtn_user, rtn_pass]):
 		print("Not all host environment variables present. Must have:", file=sys.stderr)
 		print("CML_HOST or VIRL2_URL or BREAKOUT_CONTROLLER: CML host IP/address")
 		print("CML_USER or VIRL2_USER or BREAKOUT_USERNAME: The username of the CML user")
@@ -60,14 +60,23 @@ def client_from_env(ssl_verify: bool=False, exit_on_error: bool=True) -> virl.Cl
 		else:
 			raise e
 
-def get_client(ns: argparse.Namespace = None, ssl_verify: bool = None, exit_on_error: bool=True) -> virl.ClientLibrary:
+def get_client(ns: argparse.Namespace = None, ssl_verify: bool = None, exit_on_error: bool = None) -> virl.ClientLibrary:
 	"""
 	Searches for environment variables suitable for creating a `virl.ClientLibrary`
 	
 	An `argparse.Namespace` can be passed to provide configurations. The namespace keys are defined in `autocml.argparse_client`
+
+	If exit_on_error is None/not passed, then it will be true for scripts and false for interactive sessions.
 	"""
 
 	ssl_verify=ssl_verify
+
+	if exit_on_error is None:
+		try:
+			import __main__ as main
+			exit_on_error = hasattr(main, '__file__')
+		except:
+			exit_on_error = True
 
 	if ssl_verify is None and ns is not None:
 		try:

@@ -4,6 +4,7 @@ import sys
 from . import verify_ints, bulk_lab, pcap
 from . import dump_pings, dump_cfgs
 from . import start_session
+from . import add_users
 
 # __all__ = [
 # 	'assert_ints', 'bulk_yaml', 'pcap',
