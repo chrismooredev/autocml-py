@@ -22,7 +22,7 @@ setup(
     name='autocml',  # Required
 
     # https://packaging.python.org/en/latest/single_source_version.html
-    version='0.0.3',  # Required
+    version='0.0.4',  # Required
 
     # This is a one-line description or tagline of what your project does. This
     # corresponds to the "Summary" metadata field:
@@ -114,7 +114,7 @@ setup(
     #
     #   py_modules=["my_module"],
     #
-    packages=find_packages('autocml'),  # Required
+    packages=find_packages('src'),  # Required
     #packages=find_packages('autocml'),
 
     # Specify which Python versions you support. In contrast to the
